@@ -1,0 +1,19 @@
+---
+title: "My R Markdown Document"
+date:  "`r Sys.Date()`"
+author: "Lincoln Colling"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(here)
+library(tidyverse)
+```
+
+## Images
+
+Here is an example of an embedded image.
+
+![A space pirate](`r here::here("images","paas.png")`)

@@ -1,0 +1,229 @@
+---
+title: "Week 7 Worksheet"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(paasweek7)
+library(tidyverse)
+
+# Set up the data 
+score_gender_tib <- score_gender_tib
+stroop_tib <- stroop_tib
+exp1_tib <- exp1_tib
+
+```
+
+# How to use this worksheet
+
+There are a number of code chunks listed below. You'll see that all the code chunks have the option set for `eval = FALSE`.
+This means that code isn't the code chunk won't be run. This is because some of the code chunks are incomplete and you'll
+need to fill in information before they'll run properly. When you start workign on the exercises in a code chunk set
+`eval = TRUE` before you **Knit** the document.
+
+You'll also notice inside code chunks you sometimes see the `#` sign. Outside of code chunks the `#` sign is used for
+marking headings. Inside of code chunks the `#` sign is used for marking *comments*. Comments are just there for people
+to read. When the computer runs the code it ignores comments. So don't be alarmed when you see comments. They're just
+there to help you and they won't change the way the code runs. You can even add your own comments to code chunks as a
+way of keeping notes!
+
+# Part I
+
+Part I of the worksheet deals with variables, functions and piping!
+
+## Quiz
+
+### Question 1
+
+Set the variables called **A** and **B** so that **C** will be equal to 11 in the code below
+
+```{r partI_ex1, eval = TRUE}
+
+# START OF ANSWER----------------------
+
+A <-  # Edit this line!
+B <-  # Edit this line!
+
+C <- A + B # DO NOT EDIT THIS LINE
+
+### END OF ANSWER---------------------
+
+paasweek7:::task1(A,B,C)
+```
+
+### Question 2
+
+The function `add1()` adds 1 to whatever it's input is. The function `add5()` adds 5 to whatever it's input is.
+
+String together, using `%>%`, the functions `add1()` and `add5()` so that the ouput is 11. Save the output in a
+variable named `my_var`
+
+```{r partI_ex2, eval = FALSE}
+called <- 0
+
+# START OF ANSWER----------------------
+
+my_var <-  # Edit this line!
+
+
+### END OF ANSWER---------------------
+
+paasweek7:::task2(my_var,called)
+
+```
+
+
+### Question 3
+
+The function `named()` takes the inputs `arg1`, `arg2`, `arg3`. The function prints out whateve input is given
+for a particular slot.
+
+For example, the following code:
+
+```
+named(arg1 = "pineapple", arg2 = "pizza", arg3 = "cheese")
+```
+
+would print out the text:
+```
+input value 1 is pineapple
+input value 2 is pizza
+input value 3 is cheese
+```
+
+Change the code chunk bellow so that `named()` prints out:
+```
+input value 1 is pineapple
+input value 2 is pizza
+input value 3 is cheese
+```
+
+Only edit the marked lines, and you must use the variable `pineapple` as input to the function `named()`.
+This means you'll have to have the word pineapple as an input and the variable pineapple as an input.
+
+
+```{r partI_ex3, eval = FALSE}
+collect = 0
+
+# START OF ANSWER----------------------
+
+pineapple <- "pizza" # DO NOT EDIT THIS LINE
+
+named() # Edit this line!
+
+### END OF ANSWER---------------------
+paasweek7:::task3(collect,pineapple)
+```
+
+# Part II
+
+Part II of the worksheet deals with manipualting tibbles!
+
+## Quiz
+
+### Question 1
+
+The **tibble** `score_gender_tib` is shown below. Run the code chunk to make it visible.
+
+```{r}
+score_gender_tib
+```
+
+In the code chunk below, filter `score_gender_tib` so that it only contains participants that have a `score` value greater than 2.5. Save the output as `score_gender_tib_filtered`
+
+
+```{r partII_ex1, eval = FALSE}
+
+# START OF ANSWER----------------------
+
+score_gender_tib_filtered <- score_gender_tib # Edit this line!
+
+### END OF ANSWER---------------------
+paasweek7:::task4(score_gender_tib_filtered)
+```
+
+### Question 2
+
+The **tibble** `stroop_tib` is shown below. Run the code chunk to make it visible.
+
+```{r}
+stroop_tib
+```
+
+The **tibble** `stroop_tib` contains the data from 25 particpants doing the stroop task. The person identifier is in the column labelled `id`, the condition identifier is in the column lablled `condition`, and the measure (their reaction time) is shown in the column labelled `value`
+
+
+Create a new tibble named `ET04` that only contains the data for the participant with the person identifier `ET04`
+
+```{r partII_ex2, eval = FALSE}
+
+# START OF ANSWER----------------------
+
+ET04 <- stroop_tib # Edit this line!
+
+### END OF ANSWER---------------------
+paasweek7:::task5(ET04)
+```
+
+
+### Question 3
+
+The **tibble** `exp1_tib` is shown below. Run the code chunk to make it visible.
+
+```{r}
+exp1_tib
+```
+
+The **tibble** `exp1_tib` contains data from two tasks: `task1` and `task2`. Create a new tibble named `exp1_task1_tib` that contains only the data from `task1` (but don't get rid of the other columns!)
+
+```{r partII_ex3, eval = FALSE}
+
+# START OF ANSWER----------------------
+
+exp1_task1_tib <- # Edit this line!
+
+### END OF ANSWER---------------------
+paasweek7:::task6(exp1_tib,exp1_task1_tib)
+
+```
+
+
+### Advanced exercise 1
+
+Using the fuction `select()` selects a particular column. The output of the function is another **tibble**. Because the output is a tibble the output will contain the values in the column as well as the column header. Sometimes, however, we don't want the column header, but only want the values in the column. To access only the values we can use the `$`. See the two code chunks below to see how it works. Remember to press run or to knit the document to see the output
+
+```{r}
+stroop_tib %>% select(id)
+```
+
+The code below will extract only the values in `id`. The ouput isn't a tibble. It's something called a **vector**
+
+```{r}
+stroop_tib$id
+```
+
+The advanced task has a number of steps.
+
+1. Filter `stroop_tib` on the `value` column so that it only has values higher than 2500. Save this in a tibble called `stroop_tib_outliers`
+
+2. Extract the values in the `id` column of `stroop_tib_outliers`, and save these values in a variable (a vector) called `outlier_ids`
+
+3. The function `unique()` takes one input called `x`. The ouput will be all the unique values in the input vector. Use `outlier_ids` as an input to `unique()` to create a new variable called `unique_outlier_ids` which contains only the unique values in `outlier_ids`
+
+```{r advanced, eval = FALSE}
+
+# START OF ANSWER----------------------
+
+stroop_tib_outliers <- # Edit this line!
+
+outlier_ids <- # Edit this line!
+
+unique_outlier_ids <- unique(x = ) # Edit this line!
+
+### END OF ANSWER---------------------
+paasweek7:::task10(stroop_tib_outliers,outlier_ids,unique_outlier_ids)
+
+```
